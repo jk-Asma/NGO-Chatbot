@@ -1,0 +1,155 @@
+
+<!-- Sample interface
+<!DOCTYPE html>
+<html>
+<head>
+<title>NayePankh AI Support Chatbot</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="container">
+<h1>24/7 NGO Support Chatbot</h1>
+<p>Volunteer • Donation • NGO Information</p>
+
+<div id="chatbox"></div>
+
+<input id="message" placeholder="Type your question">
+<button onclick="sendMessage()">Send</button>
+</div>
+
+<script>
+async function sendMessage(){
+ const msg=document.getElementById("message").value;
+
+ const response=await fetch("/chat",{
+ method:"POST",
+ headers:{"Content-Type":"application/json"},
+ body:JSON.stringify({message:msg})
+ });
+
+ const data=await response.json();
+
+ document.getElementById("chatbox").innerHTML +=
+ "<p><b>You:</b> "+msg+"</p><p><b>Bot:</b> "+data.reply+"</p>";
+}
+</script>
+</body>
+</html> -->
+
+<!-- new interface-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NayePankh AI Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="chat-container">
+
+    <div class="header">
+        <h1>NayePankh Foundation</h1>
+        <p>24/7 AI Support Assistant</p>
+    </div>
+
+    <div id="chatbox">
+
+        <div class="bot-message">
+            Hello! Welcome to NayePankh Foundation.
+            How may I help you today?
+        </div>
+
+        <!-- Add NGO Quick Action Buttons -->
+        <div class="quick-actions">
+
+            <button onclick="fillQuestion('I want to volunteer')">
+            Volunteer
+            </button>
+            
+            <button onclick="fillQuestion('How can I donate?')">
+            Donate
+            </button>
+            
+            <button onclick="fillQuestion('Tell me about NayePankh')">
+            About NGO
+            </button>
+            
+            </div>
+
+    </div>
+
+    <div class="input-area">
+
+        <input
+            type="text"
+            id="message"
+            placeholder="Ask about volunteering, donations, programs..."
+        >
+
+        <button onclick="sendMessage()">
+            Send
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+async function sendMessage() {
+
+    const input = document.getElementById("message");
+
+    const message = input.value;
+
+    if(message.trim() === "") return;
+
+    const chatbox = document.getElementById("chatbox");
+
+    chatbox.innerHTML += `
+        <div class="user-message">${message}</div>
+    `;
+
+    const response = await fetch("/chat",{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+            message:message
+        })
+    
+    });
+    
+
+    const data = await response.json();
+
+    chatbox.innerHTML += `
+        <div class="bot-message">${data.reply}</div>
+    `;
+
+    input.value = "";
+
+    chatbox.scrollTop = chatbox.scrollHeight;
+}
+
+// add enter key support
+document.getElementById("message")
+    .addEventListener("keypress", function(event){
+
+    if(event.key === "Enter"){
+        sendMessage();
+    }
+
+});
+// NGO quick button
+function fillQuestion(text){
+    document.getElementById("message").value=text;
+}
+
+
+</script>
+<h6>developed by :<strong>Asma</strong> |VCTM,Aligarh,U.P,India|Btech(CSE)</h6>
+</body>
+</html>

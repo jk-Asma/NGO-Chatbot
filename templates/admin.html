@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Volunteer Dashboard</title>
+
+    <style>
+
+        body{
+            font-family:Arial;
+            padding:20px;
+            background:#f4f7fb;
+        }
+
+        h1{
+            text-align:center;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            background:white;
+        }
+
+        th,td{
+            border:1px solid #ddd;
+            padding:10px;
+            text-align:left;
+        }
+
+        th{
+            background:#1e88e5;
+            color:white;
+        }
+
+        .stats{
+    display:flex;
+    gap:20px;
+    margin-bottom:30px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+    min-width:200px;
+}
+
+    </style>
+
+</head>
+<body>
+
+<h1>NayePankh  Dashboard</h1>
+<h2>TESTING STATS</h2>
+<!-- analytics card -->
+
+<div class="stats">
+
+    <div class="card">
+        
+        <h2>{{ total_volunteers }}</h2>
+        <p>Total Volunteers</p>
+    </div>
+
+    <div class="card">
+        
+        <h2>{{ total_donations }}</h2>
+        <p>Total Donations</p>
+    </div>
+
+</div>
+
+<h2>Volunteers Records</h2>
+
+<table>
+
+<tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Phone</th>
+    <th>Skills</th>
+    <th>Hours</th>
+</tr>
+
+{% for volunteer in volunteers %}
+
+<tr>
+
+<td>{{ volunteer[0] }}</td>
+<td>{{ volunteer[1] }}</td>
+<td>{{ volunteer[2] }}</td>
+<td>{{ volunteer[3] }}</td>
+<td>{{ volunteer[4] }}</td>
+<td>{{ volunteer[5] }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+
+<!-- Donation table -->
+<h2>Donation Records</h2>
+
+<table>
+
+<tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Phone</th>
+    <th>Amount</th>
+    <th>Cause</th>
+</tr>
+
+{% for donation in donations %}
+
+<tr>
+
+<td>{{ donation[0] }}</td>
+<td>{{ donation[1] }}</td>
+<td>{{ donation[2] }}</td>
+<td>{{ donation[3] }}</td>
+<td>{{ donation[4] }}</td>
+<td>{{ donation[5] }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+
+
+
+
+</body>
+</html>
